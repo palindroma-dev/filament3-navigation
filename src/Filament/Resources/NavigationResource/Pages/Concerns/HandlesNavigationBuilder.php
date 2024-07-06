@@ -12,6 +12,7 @@ use Filament\Forms\Get;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use RyanChandler\FilamentNavigation\FilamentNavigation;
+use Z3d0X\FilamentFabricator\Models\Page;
 
 trait HandlesNavigationBuilder
 {
@@ -124,6 +125,11 @@ trait HandlesNavigationBuilder
                 ])
                 ->modalWidth('md')
                 ->action(function (array $data) {
+                    if(isset($data["data"]["page_id"])) {
+                      $page = Page::findOrFail($data["data"]["page_id"]);
+                      $data["data"]["page_slug"] = $page->slug;
+                    }
+
                     if ($this->mountedItem) {
                         data_set($this, $this->mountedItem, array_merge(data_get($this, $this->mountedItem), $data));
 
