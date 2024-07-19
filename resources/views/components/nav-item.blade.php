@@ -25,7 +25,7 @@
                 wire:click="editItem('{{ $statePath }}')"
                 class="appearance-none px-3 py-2 text-left"
             >
-                <span>{{ $item['label'] }}</span>
+                <span>{{ $item['label'][$this->activeLocale] ?? '' }}</span>
             </button>
 
             @if(count($item['children']) > 0)

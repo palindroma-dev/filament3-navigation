@@ -8,15 +8,17 @@ use RyanChandler\FilamentNavigation\FilamentNavigation;
 
 class ListNavigations extends ListRecords
 {
-    public static function getResource(): string
-    {
-        return FilamentNavigation::get()->getResource();
-    }
+  use ListRecords\Concerns\Translatable;
 
-    protected function getActions(): array
-    {
-        return [
-            CreateAction::make('create'),
-        ];
-    }
+  public static function getResource(): string
+  {
+    return FilamentNavigation::get()->getResource();
+  }
+
+  protected function getActions(): array
+  {
+    return [
+      CreateAction::make('create'),
+    ];
+  }
 }
