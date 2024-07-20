@@ -16,6 +16,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use RyanChandler\FilamentNavigation\FilamentNavigation;
 use Z3d0X\FilamentFabricator\Models\Page;
+use Filament\Core\Services\GoogleTranslateService;
 
 trait HandlesNavigationBuilder
 {
@@ -135,6 +136,8 @@ trait HandlesNavigationBuilder
         ])
         ->modalWidth('md')
         ->action(function (array $data) {
+          $translateService = app(GoogleTranslateService::class);
+
           if (isset($data["data"]["page_id"])) {
             $page = Page::findOrFail($data["data"]["page_id"]);
             $data["data"]["page_slug"] = $page->slug;
@@ -147,7 +150,11 @@ trait HandlesNavigationBuilder
 
           foreach(config('app.locales') as $locale) {
             if(empty($data['label'][$locale]) || $locale == $activeLocale) {
-              $data['label'][$locale] = $label;
+              if($locale == $activeLocale) {
+                $data['label'][$locale] = $label;
+              } else {
+                $data['label'][$locale] = $translateService->translate($label, $locale);
+              }
             }
           }
 
