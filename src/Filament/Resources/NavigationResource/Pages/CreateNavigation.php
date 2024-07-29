@@ -5,7 +5,7 @@ namespace RyanChandler\FilamentNavigation\Filament\Resources\NavigationResource\
 use Filament\Resources\Pages\CreateRecord;
 use RyanChandler\FilamentNavigation\Filament\Resources\NavigationResource\Pages\Concerns\HandlesNavigationBuilder;
 use RyanChandler\FilamentNavigation\FilamentNavigation;
-use App\Concerns\CreateRecord\Translatable;
+use Filament\Core\Concerns\CreateRecord\Translatable;
 
 class CreateNavigation extends CreateRecord
 {

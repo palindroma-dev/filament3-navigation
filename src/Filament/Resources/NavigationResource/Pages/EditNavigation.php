@@ -5,7 +5,7 @@ namespace RyanChandler\FilamentNavigation\Filament\Resources\NavigationResource\
 use Filament\Resources\Pages\EditRecord;
 use RyanChandler\FilamentNavigation\Filament\Resources\NavigationResource\Pages\Concerns\HandlesNavigationBuilder;
 use RyanChandler\FilamentNavigation\FilamentNavigation;
-use App\Concerns\EditRecord\Translatable;
+use Filament\Core\Concerns\EditRecord\Translatable;
 
 class EditNavigation extends EditRecord
 {

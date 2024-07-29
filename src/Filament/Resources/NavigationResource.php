@@ -2,7 +2,6 @@
 
 namespace RyanChandler\FilamentNavigation\Filament\Resources;
 
-use App\Filament\Actions\Tables\LocaleSwitcher;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Section;
@@ -20,7 +19,7 @@ use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
 use RyanChandler\FilamentNavigation\FilamentNavigation;
 use RyanChandler\FilamentNavigation\Models\Navigation;
-use App\Concerns\Resource\Translatable;
+use Filament\Core\Concerns\Resource\Translatable;
 
 class NavigationResource extends Resource
 {

@@ -2,8 +2,8 @@
 
 namespace RyanChandler\FilamentNavigation\Filament\Resources\NavigationResource\Pages\Concerns;
 
-use App\Filament\Actions\Forms\LocaleSwitcher;
-use App\Filament\Actions\Forms\ModalLocaleSwitcher;
+use Filament\Core\Actions\Forms\LocaleSwitcher;
+use Filament\Core\Actions\Forms\ModalLocaleSwitcher;
 use Filament\Actions\Action;
 use Filament\Forms\ComponentContainer;
 use Filament\Forms\Components\Component;
