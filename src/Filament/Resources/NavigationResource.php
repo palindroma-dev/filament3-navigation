@@ -11,7 +11,6 @@ use Filament\Forms\Components\ViewField;
 use Filament\Forms\Form;
 use Filament\Forms\Set;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -144,11 +143,6 @@ class NavigationResource extends Resource
       ->actions([
         EditAction::make()
           ->icon(null),
-        DeleteAction::make()
-          ->icon(null),
-      ])
-      ->filters([
-
       ]);
   }
 
@@ -156,7 +150,6 @@ class NavigationResource extends Resource
   {
     return [
       'index' => NavigationResource\Pages\ListNavigations::route('/'),
-      'create' => NavigationResource\Pages\CreateNavigation::route('/create'),
       'edit' => NavigationResource\Pages\EditNavigation::route('/{record}'),
     ];
   }
@@ -164,5 +157,10 @@ class NavigationResource extends Resource
   public static function getModel(): string
   {
     return FilamentNavigation::get()->getModel();
+  }
+
+  public static function shouldRegisterNavigation(): bool
+  {
+    return false;
   }
 }
