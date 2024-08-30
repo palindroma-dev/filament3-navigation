@@ -2,6 +2,7 @@
 
 namespace RyanChandler\FilamentNavigation\Filament\Resources;
 
+use App\Enums\Permissions;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Section;
