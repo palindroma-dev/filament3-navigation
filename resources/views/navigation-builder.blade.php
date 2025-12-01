@@ -17,7 +17,7 @@
             })"
             data-sortable-container
         >
-            @forelse($getState() as $uuid => $item)
+            @forelse(($getState() ?? []) as $uuid => $item)
                 <x-filament-navigation::nav-item :statePath="$getStatePath() . '.' . $uuid" :item="$item" />
             @empty
                 <div @class([

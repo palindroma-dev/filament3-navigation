@@ -22,6 +22,45 @@ class Navigation extends Model
         'items' => 'json',
     ];
 
+    protected $attributes = [
+        'items' => '[]',
+    ];
+
+    /**
+     * Get the items attribute, ensuring it's always an array
+     */
+    public function getItemsAttribute($value)
+    {
+        if ($value === null || $value === '') {
+            return [];
+        }
+        
+        $items = is_string($value) ? json_decode($value, true) : $value;
+        
+        if (!is_array($items)) {
+            return [];
+        }
+        
+        // Ensure all items have children as arrays
+        return $this->ensureChildrenAreArrays($items);
+    }
+
+    /**
+     * Recursively ensure all children are arrays
+     */
+    protected function ensureChildrenAreArrays(array $items): array
+    {
+        foreach ($items as $uuid => &$item) {
+            if (!isset($item['children']) || $item['children'] === null || !is_array($item['children'])) {
+                $item['children'] = [];
+            } else {
+                $item['children'] = $this->ensureChildrenAreArrays($item['children']);
+            }
+        }
+        
+        return $items;
+    }
+
     public array $translatable = [
       'name',
     ];

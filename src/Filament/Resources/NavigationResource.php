@@ -25,6 +25,21 @@ class NavigationResource extends Resource
 {
   use Translatable;
 
+  public static function getTranslatableAttributes(): array
+  {
+    return ['name']; // Only 'name' is translatable, 'items' is not
+  }
+
+  public static function getTranslatableLocales(): array
+  {
+    return config('app.locales', ['en', 'ka', 'ru']);
+  }
+
+  public static function getDefaultTranslatableLocale(): string
+  {
+    return session()->get('filament.translatable.activeLocale') ?? config('app.fallback_locale', 'en');
+  }
+
   protected static ?string $navigationIcon = 'heroicon-o-bars-3';
 
   protected static bool $showTimestamps = true;
@@ -60,6 +75,7 @@ class NavigationResource extends Resource
           ViewField::make('items')
             ->label(__('filament-navigation::filament-navigation.attributes.items'))
             ->default([])
+            ->statePath('items')
             ->view('filament-navigation::navigation-builder'),
         ])
           ->columnSpan([

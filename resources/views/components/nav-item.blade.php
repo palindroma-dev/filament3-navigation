@@ -25,10 +25,29 @@
                 wire:click="editItem('{{ $statePath }}')"
                 class="appearance-none px-3 py-2 text-left"
             >
-                <span>{{ $item['label'][$this->activeLocale] ?? '' }}</span>
+                <span>
+                    @php
+                        $activeLocale = session()->get('filament.translatable.activeLocale') ?? config('app.fallback_locale', 'en');
+                        $label = $item['label'] ?? '';
+                        
+                        // Handle both array and string formats
+                        if (is_array($label)) {
+                            echo $label[$activeLocale] ?? $label['en'] ?? $label['ka'] ?? reset($label) ?? '';
+                        } else {
+                            // Fallback: if label is a string, check if we have translations in data
+                            if (isset($item['data'][$activeLocale]['title'])) {
+                                echo $item['data'][$activeLocale]['title'];
+                            } elseif (isset($item['data']['en']['title'])) {
+                                echo $item['data']['en']['title'];
+                            } else {
+                                echo $label;
+                            }
+                        }
+                    @endphp
+                </span>
             </button>
 
-            @if(count($item['children']) > 0)
+            @if(isset($item['children']) && is_array($item['children']) && count($item['children']) > 0)
                 <button type="button" x-on:click="open = !open" title="Toggle children" class="appearance-none text-gray-500">
                     <svg class="w-3.5 h-3.5 transition ease-in-out duration-200" x-bind:class="{
                         '-rotate-90': !open,
@@ -65,17 +84,20 @@
         </div>
     </div>
 
-    <div x-show="open" x-collapse class="ml-6">
-        <div
-            class="space-y-2"
-            wire:key="{{ $statePath }}-children"
-            x-data="navigationSortableContainer({
-                statePath: @js($statePath . '.children')
-            })"
-        >
-            @foreach ($item['children'] as $uuid => $child)
-                <x-filament-navigation::nav-item :statePath="$statePath . '.children.' . $uuid" :item="$child" />
-            @endforeach
+    @if(isset($item['children']) && is_array($item['children']) && count($item['children']) > 0)
+        <div x-show="open" x-collapse class="ml-6">
+            <div
+                class="space-y-2"
+                wire:key="{{ $statePath }}-children"
+                x-data="navigationSortableContainer({
+                    statePath: @js($statePath . '.children')
+                })"
+                data-sortable-container
+            >
+                @foreach ($item['children'] as $uuid => $child)
+                    <x-filament-navigation::nav-item :statePath="$statePath . '.children.' . $uuid" :item="$child" />
+                @endforeach
+            </div>
         </div>
-    </div>
+    @endif
 </div>
