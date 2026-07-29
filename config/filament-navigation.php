@@ -1,8 +1,12 @@
 <?php
+
+use RyanChandler\FilamentNavigation\Models\Navigation;
+use RyanChandler\FilamentNavigation\Filament\Resources\NavigationResource;
+
 // config for RyanChandler/FilamentNavigation
 return [
 
-    'navigation_model' => \RyanChandler\FilamentNavigation\Models\Navigation::class,
+    'navigation_model' => Navigation::class,
 
-    'navigation_resource' => \RyanChandler\FilamentNavigation\Filament\Resources\NavigationResource::class,
+    'navigation_resource' => NavigationResource::class,
 ];

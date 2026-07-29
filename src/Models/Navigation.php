@@ -2,6 +2,7 @@
 
 namespace RyanChandler\FilamentNavigation\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
@@ -9,8 +10,8 @@ use Spatie\Translatable\HasTranslations;
 /**
  * @property string $handle
  * @property array $items
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  */
 class Navigation extends Model
 {

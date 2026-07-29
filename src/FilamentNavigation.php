@@ -2,6 +2,8 @@
 
 namespace RyanChandler\FilamentNavigation;
 
+use Filament\Resources\Resource;
+use Illuminate\Database\Eloquent\Model;
 use Closure;
 use Filament\Contracts\Plugin;
 use Filament\Forms\Components\Select;
@@ -26,7 +28,7 @@ class FilamentNavigation implements Plugin
         return 'navigation';
     }
 
-    /** @param class-string<\Filament\Resources\Resource> $resource */
+    /** @param class-string<Resource> $resource */
     public function usingResource(string $resource): static
     {
         $this->resource = $resource;
@@ -34,7 +36,7 @@ class FilamentNavigation implements Plugin
         return $this;
     }
 
-    /** @param class-string<\Illuminate\Database\Eloquent\Model> $model */
+    /** @param class-string<Model> $model */
     public function usingModel(string $model): static
     {
         $this->model = $model;

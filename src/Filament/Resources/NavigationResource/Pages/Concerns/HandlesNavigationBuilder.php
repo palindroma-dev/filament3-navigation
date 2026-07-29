@@ -2,16 +2,16 @@
 
 namespace RyanChandler\FilamentNavigation\Filament\Resources\NavigationResource\Pages\Concerns;
 
+use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Component;
+use Filament\Schemas\Components\Group;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Core\Actions\Forms\LocaleSwitcher;
 use Filament\Core\Actions\Forms\ModalLocaleSwitcher;
 use Filament\Actions\Action;
-use Filament\Forms\ComponentContainer;
-use Filament\Forms\Components\Component;
-use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ViewField;
-use Filament\Forms\Get;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use RyanChandler\FilamentNavigation\FilamentNavigation;
@@ -79,7 +79,7 @@ trait HandlesNavigationBuilder
     return [
       LocaleSwitcher::make(),
       Action::make('item')
-        ->mountUsing(function (ComponentContainer $form) {
+        ->mountUsing(function (Schema $schema) {
           if (!$this->mountedItem) {
             return;
           }
@@ -87,10 +87,10 @@ trait HandlesNavigationBuilder
           $activeLocale = $this->getLocale();
           $this->mountedItemData['label'] = $this->mountedItemData['label'][$activeLocale] ?? $this->mountedItemData['label'];
 
-          $form->fill($this->mountedItemData);
+          $schema->fill($this->mountedItemData);
         })
         ->view('filament-navigation::hidden-action')
-        ->form([
+        ->schema([
           /*ModalLocaleSwitcher::make('lang_switcher')
             ->label(__('filament-navigation::filament-navigation.attributes.items'))
             ->view('filament.actions.modal-locale-action'),*/

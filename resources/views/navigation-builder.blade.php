@@ -1,14 +1,10 @@
-<x-filament-forms::field-wrapper
-    :id="$getId()"
-    :label="$getLabel()"
-    :label-sr-only="$isLabelHidden()"
-    :helper-text="$getHelperText()"
-    :hint="$getHint()"
-    :hint-icon="$getHintIcon()"
-    :required="$isRequired()"
-    :state-path="$getStatePath()"
-    class="filament-navigation"
->
+{{--
+    Filament 5 wraps a field's view in the field wrapper itself, so this view
+    only renders the field body. It used to open with
+    `<x-filament-forms::field-wrapper>`, a Filament 3 component whose props
+    (`$getHelperText()` and friends) no longer exist.
+--}}
+<div class="filament-navigation">
     <div wire:key="navigation-items-wrapper">
         <div
             class="space-y-2"
@@ -30,9 +26,9 @@
         </div>
     </div>
 
-    <div class="flex justify-end">
+    <div class="flex justify-end pt-2">
         <x-filament::button wire:click="createItem" type="button" size="sm">
             {{__('filament-navigation::filament-navigation.items.add-item')}}
         </x-filament::button>
     </div>
-</x-filament-forms::field-wrapper>
+</div>
