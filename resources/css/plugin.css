@@ -1,6 +1,29 @@
-@tailwind base;
+/*
+ * No `@tailwind base` on purpose. Tailwind 3's base layer emits an unlayered
+ * `*,::before,::after { --tw-ring-shadow: 0 0 #0000; --tw-shadow: 0 0 #0000; ... }`
+ * reset. This file is served as a plain <link>, so those rules sit outside any
+ * cascade layer, and unlayered declarations beat every rule in Filament 5's
+ * `@layer components` regardless of specificity — the reset was stripping the
+ * ring and shadow off `.fi-input-wrp` on every page of the panel, leaving form
+ * fields with no border. `corePlugins.preflight: false` does not suppress it;
+ * only dropping the base layer does.
+ *
+ * Filament 5's theme registers the same variables through `@property`, so the
+ * utilities below still resolve — except `--tw-skew-x`/`--tw-skew-y`, which it
+ * declares without an initial value. `.-rotate-90` is the only utility here
+ * that reads them, so it carries its own defaults.
+ */
 @tailwind components;
 @tailwind utilities;
+
+.filament-navigation .-rotate-90 {
+    --tw-translate-x: 0;
+    --tw-translate-y: 0;
+    --tw-skew-x: 0;
+    --tw-skew-y: 0;
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+}
 
 .sortable-container-maybe-active {
 
