@@ -28,3 +28,26 @@
 .sortable-container-maybe-active {
 
 }
+
+/*
+ * Tailwind 3.0's `important: ".filament-navigation"` selector strategy emits
+ * dark-mode rules as `.filament-navigation .dark .dark\:*`, i.e. it expects a
+ * `.dark` element inside the builder — but Filament toggles `dark` on <html>,
+ * so those generated rules never match and the nav items stay white on the
+ * dark theme. Hand-written equivalents with the ancestor order corrected.
+ */
+.dark .filament-navigation .dark\:divide-gray-600 > :not([hidden]) ~ :not([hidden]) {
+    border-color: rgb(75 85 99);
+}
+
+.dark .filament-navigation .dark\:border-gray-600 {
+    border-color: rgb(75 85 99);
+}
+
+.dark .filament-navigation .dark\:bg-gray-700 {
+    background-color: rgb(55 65 81);
+}
+
+.dark .filament-navigation .dark\:bg-gray-800 {
+    background-color: rgb(31 41 55);
+}
