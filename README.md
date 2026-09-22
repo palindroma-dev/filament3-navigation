@@ -185,3 +185,11 @@ Please review [our security policy](../../security/policy) on how to report secu
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+## Building assets
+
+Use Node.js 20 or newer. Run `npm ci` followed by `npm run prod` to build the
+JavaScript and CSS shipped in `resources/dist`. `npm run dev` produces an
+unminified build, and `npm run watch` rebuilds JavaScript, styles, and view-based
+Tailwind classes as they change. The esbuild/PostCSS pipeline keeps the asset
+paths consumed by the Filament service provider and replaces Laravel Mix.
