@@ -14,7 +14,8 @@ use Spatie\Translatable\HasTranslations;
  */
 class Navigation extends Model
 {
-    use HasFactory, HasTranslations;
+    use HasFactory;
+    use HasTranslations;
 
     protected $guarded = [];
 

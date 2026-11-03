@@ -2,14 +2,15 @@
 
 namespace RyanChandler\FilamentNavigation\Filament\Resources\NavigationResource\Pages;
 
+use Filament\Core\Concerns\EditRecord\Translatable;
 use Filament\Resources\Pages\EditRecord;
 use RyanChandler\FilamentNavigation\Filament\Resources\NavigationResource\Pages\Concerns\HandlesNavigationBuilder;
 use RyanChandler\FilamentNavigation\FilamentNavigation;
-use Filament\Core\Concerns\EditRecord\Translatable;
 
 class EditNavigation extends EditRecord
 {
-    use HandlesNavigationBuilder, Translatable;
+    use HandlesNavigationBuilder;
+    use Translatable;
 
     public static function getResource(): string
     {
