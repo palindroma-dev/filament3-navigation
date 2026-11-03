@@ -2,21 +2,20 @@
 
 namespace RyanChandler\FilamentNavigation\Filament\Resources\NavigationResource\Pages;
 
-use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use RyanChandler\FilamentNavigation\FilamentNavigation;
 
 class ListNavigations extends ListRecords
 {
-  use ListRecords\Concerns\Translatable;
+    use ListRecords\Concerns\Translatable;
 
-  public static function getResource(): string
-  {
-    return FilamentNavigation::get()->getResource();
-  }
+    public static function getResource(): string
+    {
+        return FilamentNavigation::get()->getResource();
+    }
 
-  protected function getActions(): array
-  {
-    return [];
-  }
+    protected function getActions(): array
+    {
+        return [];
+    }
 }
